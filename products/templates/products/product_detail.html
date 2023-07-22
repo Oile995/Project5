@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-6 col-lg-4 offset-lg-1">
+                <div class="image-container my-5">
+                    {% if product.image %}
+                            <a class="h-50" href="{{ product.image.url }}" target="_blank">
+                                <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            </a>
+                    {% else %}
+                        <a href="">
+                            <img class="card-img-top img-fluid" src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

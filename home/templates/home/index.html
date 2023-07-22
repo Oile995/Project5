@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
 {% block content %}
 
-    <h1 class="display-4 text-success"> You have a new home page</h1>
+   <div class="container h-100">
+    <div class="row h-100">
+        <div class="col-7 col-md-6 my-auto">
+            Welcome to the coolzone!
+        </div>
+    </div>
+   </div>
 {% endblock %}

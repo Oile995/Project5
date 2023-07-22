@@ -26,6 +26,15 @@ body {
 
 
 
+.overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: white;
+	z-index: -1;
+}
 
 
 
@@ -48,8 +57,29 @@ body {
           left: 0;
           z-index: 1030;
       }
-  
       .header-container {
           padding-top: 164px;
       }
   }
+
+    /* pad the top a bit when navbar is collapsed on mobile */
+@media (min-width: 576px) {
+    .header-container {
+        padding-top: 167px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
+    }
+}
+
+  /* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 576px) {
+    .header-container {
+        padding-top: 95px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
+    }
+}
