@@ -10,9 +10,16 @@ body {
     font-family: 'Lato';
 }
 
+.description-container{
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
 
 
-
+.similar-products{
+    margin-top: 10vw;
+}
 
 
 

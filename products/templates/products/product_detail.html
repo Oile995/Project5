@@ -13,7 +13,7 @@
     <div class="overlay"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-6 col-lg-4 offset-lg-1">
+            <div class="col-12 col-lg-4">
                 <div class="image-container my-5">
                     {% if product.image %}
                             <a class="h-50" href="{{ product.image.url }}" target="_blank">
@@ -25,6 +25,78 @@
                         </a>
                     {% endif %}
                 </div>
+                <h4 class="font-weight-bold"> Price: {{product.price}}$ </h4>
+                <h6 class="font-weight-bold"> Stock: 1 </h6>
+            </div>
+            <div class="col-12 col-lg-3">
+                <h2 class="text-center">{{ product.name }}</h2>
+                <div class="description-container my-5 border border-primary h-50">
+                    <div> <span class="font-weight-bold">Description:</span></div>
+                    <p class="text-dark">
+                        {{product.description}}
+                    </p>
+                </div>
+                <div class="description-container my-5 border border-primary h-50">
+                    <div> <span class="font-weight-bold">Specifications:</span></div>
+                    <p class="text-dark">
+                        {{product.description}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="video-container my-5 bg-primary h-100">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row similar-products">
+            <div class="col-12 col-lg-6">
+                <h4>Other products in the same category:</h4>
+                <div class="row">
+                {% for p in page_obj %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                {% if not p.image %}
+                                <img class="card-img-top"
+                                    src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image of barbell">
+                                {% else %}
+                                <img class="card-img-top" src=" {{ p.image.url }}" alt="User choosen workout image">
+                                {% endif %}
+                                <div class="image-flash">
+                                    <p class="author">Category: {{ p.subcategory }}</p>
+                                </div>
+                            </div>
+                            <a href="" class="workout-link">
+                                <h2 class="card-title">{{ p.name }}</h2>
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row">
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            {% if is_paginated %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            <div class="col-12 col-lg-5 offset-1 h-50 bg-primary">
+                <p>Comments goes here!</p>
             </div>
         </div>
     </div>
