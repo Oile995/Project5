@@ -15,9 +15,10 @@
           Ventilation
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+          <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
+          <a href="{% url 'products' %}?sort=subcategory&direction=asc" class="dropdown-item ">By Category</a>
+          <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
         </div>
       </li>
       <li class="nav-item active">

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product, Category, SubCategory, Review
+from django_summernote.admin import SummernoteModelAdmin
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -10,8 +11,8 @@ class SubCategoryAdmin(admin.ModelAdmin):
     list_display = ('category', 'friendly_name', 'name',)
 
 
-
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SummernoteModelAdmin):
+    summernote_fields = ('description', 'specification')
     list_display = (
         'sku',
         'name',
@@ -20,6 +21,9 @@ class ProductAdmin(admin.ModelAdmin):
         'rating',
         'image',
     )
+    search_fields = ['name', 'subcategory', 'active_deal']
+    list_filter = ('name', 'subcategory')
+
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (

@@ -33,13 +33,13 @@
                 <div class="description-container my-5 border border-primary h-50">
                     <div> <span class="font-weight-bold">Description:</span></div>
                     <p class="text-dark">
-                        {{product.description}}
+                        {{product.description | safe}}
                     </p>
                 </div>
                 <div class="description-container my-5 border border-primary h-50">
                     <div> <span class="font-weight-bold">Specifications:</span></div>
                     <p class="text-dark">
-                        {{product.description}}
+                        {{product.specification | safe}}
                     </p>
                 </div>
             </div>
