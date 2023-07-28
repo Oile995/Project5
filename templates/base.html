@@ -58,7 +58,7 @@
           </div>
           <div class="col-12 col-sm-4 my-auto py-1 py-lg-0 text-center text-lg-right offset-lg-2">
             <div class="list-inline-item dropdown">
-                <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="#" id="current-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_cart' %}" id="current-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="text-center">
                         <div><i class="fas fa-shopping-cart fa-lg"></i></div>
                         <p class="my-0">

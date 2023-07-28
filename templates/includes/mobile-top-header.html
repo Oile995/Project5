@@ -21,7 +21,7 @@
     </div>
 </li>
 <li class="list-inline-item dropdown">
-    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-sm-none " href="#" id="current-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-sm-none " href="{% url 'view_cart' %}" id="current-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-shopping-cart fa-lg"></i></div>
             <p class="my-0">

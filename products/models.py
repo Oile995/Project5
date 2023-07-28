@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils.text import slugify
 
 
 
@@ -44,13 +45,28 @@ class Product(models.Model):
     subcategory = models.ForeignKey('SubCategory', null=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
+    slug = models.SlugField(max_length=254, unique=True, editable=False)
+    brand = models.CharField(max_length=254)
     description = models.TextField()
     specification = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    stock = models.IntegerField(
+        default=1,
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+        )
+    rating = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
+        )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     active_deal = models.IntegerField(choices=HOMEPAGE_DEAL, default=0)
+
+    # auto-set slug as name with slugify
+    # from https://stackoverflow.com/questions/50436658/how-to-auto-generate-slug-from-my-album-model-in-django-2-0-4
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
 
 
     def __str__(self):
