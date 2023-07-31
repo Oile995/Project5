@@ -30,7 +30,7 @@ class SubCategory(models.Model):
         verbose_name_plural = 'SubCategories'
 
 
-    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
@@ -42,7 +42,7 @@ class SubCategory(models.Model):
 
 
 class Product(models.Model):
-    subcategory = models.ForeignKey('SubCategory', null=True, on_delete=models.SET_NULL)
+    subcategory = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True, editable=False)
@@ -92,7 +92,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         if not self.sku:
-            self.sku = generate_sku()
+            self.sku = self.generate_sku()
         super(Product, self).save(*args, **kwargs)
 
 
@@ -102,7 +102,7 @@ class Product(models.Model):
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
     comment = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
