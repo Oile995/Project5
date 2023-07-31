@@ -14,8 +14,8 @@ class SubCategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(SummernoteModelAdmin):
     summernote_fields = ('description', 'specification')
     list_display = (
-        'sku',
         'name',
+        'sku',
         'subcategory',
         'price',
         'rating',

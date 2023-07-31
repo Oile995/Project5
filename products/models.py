@@ -43,7 +43,7 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     subcategory = models.ForeignKey('SubCategory', null=True, on_delete=models.SET_NULL)
-    sku = models.CharField(max_length=254, null=True, blank=True)
+    sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True, editable=False)
     brand = models.CharField(max_length=254)
@@ -62,10 +62,37 @@ class Product(models.Model):
     image = models.ImageField(null=True, blank=True)
     active_deal = models.IntegerField(choices=HOMEPAGE_DEAL, default=0)
 
+    def generate_sku(self):
+        """
+        Helper function to generate a SKU,
+        rgo = first 3 char in brand name
+        ctg = category 
+        sctg = subcategory
+        cs = product name
+        """
+        rgo = self.brand[0:3]
+        ctg = self.subcategory.category.friendly_name
+        print(ctg)
+        if "AC" in ctg:
+            ctg = "AC"
+        else:
+            ctg = ctg[0:3]
+        sctg = self.subcategory.name
+        namelist = sctg.split("-")
+        sctg_name = ""
+        for i in namelist:
+            sctg_name += i[0]
+        sctg = sctg_name
+        cs = self.name[0:3]
+        generated_sku = rgo + ctg + sctg + cs
+        return generated_sku
+
     # auto-set slug as name with slugify
     # from https://stackoverflow.com/questions/50436658/how-to-auto-generate-slug-from-my-album-model-in-django-2-0-4
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        if not self.sku:
+            self.sku = generate_sku()
         super(Product, self).save(*args, **kwargs)
 
 
