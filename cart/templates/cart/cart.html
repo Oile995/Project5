@@ -39,9 +39,9 @@
                                 <tr>
                                     <td class="p-3 w-25">
                                         {% if item.product.image %}
-                                            <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt=" Image of {{ item.product.name }}">
+                                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                         {% else %}
-                                            <img class="img-fluid rounded" src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image">
+                                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                         {% endif %}
                                     </td>
                                     <td class="py-3">
