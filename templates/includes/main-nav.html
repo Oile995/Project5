@@ -5,9 +5,9 @@
           Air Conditioners
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Portable Air Conditioners">Portable Air Conditioners</a>
-          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Permanent Air Conditioners">Permanent Air Conditioners</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Split-System">Split-System</a>
+          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Multi-Split-System">Multi-Split-System</a>
+          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Portable-Air-Conditioners">Portable-Air-Conditioners</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -20,9 +20,6 @@
           <a href="{% url 'products' %}?sort=subcategory&direction=asc" class="dropdown-item ">By Category</a>
           <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
         </div>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'view_cart' %}">Contact us <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'products' %}">All Products</a>

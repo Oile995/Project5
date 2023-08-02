@@ -133,7 +133,13 @@ input[name='q']::placeholder {
 .toast-capper {
     height: 2px;
 }
-
+/* Mobile nav */
+.mobile-nav {
+    font-size: 0.75rem;
+}
+.list-inline-item:not(:last-child) {
+    margin: 0;
+}
 /*From Code-institutes Boutique ado project that in turn.. */
 /* took from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
@@ -180,12 +186,6 @@ input[name='q']::placeholder {
     border-bottom-color: #343a40 !important;
 }
 
-
-
-
-
-
-
 .overlay {
 	height: 100%;
 	width: 100%;
@@ -196,7 +196,99 @@ input[name='q']::placeholder {
 	z-index: -1;
 }
 
-
+/* ================= RATINGS ============== */
+.label-rating {
+    margin-left: 7px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  /* rating-list */
+  .rating-stars {
+    display: inline-block;
+    vertical-align: middle;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    white-space: nowrap;
+    clear: both;
+  }
+  .rating-stars i {
+    font-size: 14px;
+    color: #ccc;
+    display: inline;
+  }
+  .rating-stars img {
+    height: 14px;
+    max-width: none;
+  }
+  .rating-stars li {
+    display: block;
+    text-overflow: clip;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .rating-stars li.stars-active {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  .rating-stars li.stars-active i {
+    color: orange;
+  }
+  .rating-stars.stars-lg img {
+    height: 20px;
+    max-width: none;
+  }
+  /* Hide Radio button */
+.rate > input{
+    display: none;
+  }
+  
+  .rate{
+    display: inline-block;;
+    border: 0;
+  }
+  
+  .rate > label{
+    float: right;
+  }
+  
+  /* Showing the stars */
+  .rate > label:before{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin:0;
+    padding:0.3rem .2rem;
+    cursor: pointer;
+  }
+  
+  /* Half star */
+  .rate .half:before{
+    content: "\f089";
+    position: absolute;
+    padding-right: 0;
+  }
+  
+  /* Click and hover */
+  input:checked ~ label, label:hover ~ label{
+    color: #ffb503;
+  }
+  
+  /* hover hightlight */
+  input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
+  label:hover ~ input:checked ~ label{
+    color: #cc9000;
+  }
+  
+  .rating-star i{
+    color: #ffb503 !important;
+  }
 /* Allauth form formatting  taken from code-institutes Boutique ado*/
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /*mt-4*/

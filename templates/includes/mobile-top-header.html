@@ -1,8 +1,16 @@
 <li class="list-inline-item">
+    <a class="text-black nav-link d-block d-sm-none" href="{% url 'home' %}" id="home">
+        <div class="text-center">
+            <div><i class="fas fa-home fa-lg"></i></div>
+            <p class="my-0 mobile-nav">Home</p>
+        </div>
+    </a>
+</li>
+<li class="list-inline-item">
     <a class="text-black nav-link d-block d-sm-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-search fa-lg"></i></div>
-            <p class="my-0">Search</p>
+            <p class="my-0 mobile-nav">Search</p>
         </div>
     </a>
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
@@ -24,7 +32,7 @@
     <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-sm-none " href="{% url 'view_cart' %}" id="current-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
             <div><i class="fas fa-shopping-cart fa-lg"></i></div>
-            <p class="my-0">
+            <p class="my-0 mobile-nav">
                 {% if grand_total %}
                     ${{ grand_total|floatformat:2 }}
                 {% else %}

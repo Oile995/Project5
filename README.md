@@ -37,3 +37,8 @@ You can now use the `heroku` CLI program - try running `heroku apps` to confirm 
 ---
 
 Happy coding!
+ <i class="fa fa-star{% if product.review.user < 0.5 %}-o{% elif product.review.user >= 0.5 and product.review.user < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                            <i class="fa fa-star{% if product.review.user< 1.5 %}-o{% elif product.review.user >= 1.5 and product.review.user < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                            <i class="fa fa-star{% if product.review.user < 2.5 %}-o{% elif product.review.user >= 2.5 and product.review.user < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                            <i class="fa fa-star{% if product.review.user < 3.5 %}-o{% elif product.review.user >= 3.5 and product.review.user < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                            <i class="fa fa-star{% if product.review.user < 4.5 %}-o{% elif product.review.user >= 4.5 and product.review.user < 5 %}-half-o {% endif %}" aria-hidden="true"></i>

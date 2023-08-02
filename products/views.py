@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Product, SubCategory, Category
-from .forms import ProductForm, SubCategoryForm, CategoryForm
+from .models import Product, SubCategory, Category, Review
+from .forms import ProductForm, SubCategoryForm, CategoryForm, ReviewForm
 
 def all_products(request):
     """ A view to show all products """
@@ -60,6 +62,7 @@ def all_products(request):
 def product_detail(request, product_id):
     """ A view to show product details """
     product = get_object_or_404(Product, pk=product_id)
+    reviews = product.reviews.all()
     subcategory = product.subcategory
     category = Product.objects.filter(subcategory=subcategory)
     paginator = Paginator(category, 3)
@@ -68,8 +71,41 @@ def product_detail(request, product_id):
     context = {
         'product' : product,
         'page_obj' : page_obj,
+        'reviews' : reviews,
+        'reviewed' : False,
+        'review_form' : ReviewForm()
     }
     return render(request, 'products/product_detail.html', context)
+
+
+# Submit review
+
+def submit_review(request, product_id):
+    """
+    Submitting New and updating old Reviews depending on user.
+    Updating comment and rating.
+    Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/store/views.py
+    """
+    if request.method == 'POST':
+        try:
+            product = get_object_or_404(Product, pk=product_id)
+            review = Review.objects.get(user__id=request.user.id, product__id=product_id)
+            form = ReviewForm(request.POST, instance=review)
+            form.save()
+            messages.success(request, 'Thank you! Your review has been updated.')
+            return HttpResponseRedirect(reverse('product_detail', args=[product.id]))#redirect(reverse('product_detail'))
+
+        except Review.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = Review()
+                data.rating = form.cleaned_data['rating']
+                data.comment = form.cleaned_data['comment']
+                data.product_id = product_id
+                data.user_id = request.user.id
+                data.save()
+                messages.success(request, 'Thank you! Your review has been submitted.')
+                return redirect(reverse('product_detail', args=[product_id]))
 
 
 # SuperUser add view functions for Category, Subcategory and Products
