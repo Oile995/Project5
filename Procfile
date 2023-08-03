@@ -1,0 +1,1 @@
+web: gunicorn glacial_ac.wsgi:application
