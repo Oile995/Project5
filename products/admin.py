@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, SubCategory, Review
+from .models import Product, Category, SubCategory, Review, Icon
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -32,9 +32,16 @@ class ReviewAdmin(admin.ModelAdmin):
         'user',
         'created_on',
     )
-    
+
+
+class IconAdmin(admin.ModelAdmin):
+    list_display = (
+        'hover_text',
+        'image',
+    )
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(Icon, IconAdmin)

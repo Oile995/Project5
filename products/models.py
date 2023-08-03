@@ -42,14 +42,23 @@ class SubCategory(models.Model):
         return self.friendly_name
 
 
+class Icon(models.Model):
+    hover_text = models.CharField(max_length=100)
+    image_url = models.URLField(max_length=1024, null=True, blank=True)
+    image = models.ImageField(null=True, blank=False)
+
+    def __str__(self):
+        return self.hover_text
+
+
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True, editable=False)
     brand = models.CharField(max_length=254)
-    description = models.TextField()
-    specification = models.TextField()
+    description = models.CharField(max_length=400)
+    specification = models.CharField(max_length=400)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     stock = models.IntegerField(
         default=1,
@@ -62,6 +71,9 @@ class Product(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     active_deal = models.IntegerField(choices=HOMEPAGE_DEAL, default=0)
+    users_wishlist = models.ManyToManyField(User, related_name="user_wishlist", blank=True)
+    icons = models.ManyToManyField(Icon, related_name="icon", blank=True)
+
 
     def generate_sku(self):
         """
@@ -112,7 +124,7 @@ class Product(models.Model):
         return count
 
     def __str__(self):
-        return f"{self.name}: {self.description}: {self.average_rating()}"
+        return f"{self.name}: {self.description}: {self.averageReview()}"
 
 
 class Review(models.Model):
@@ -125,3 +137,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.comment}: {self.rating}"
+
+
+

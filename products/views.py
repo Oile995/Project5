@@ -62,17 +62,23 @@ def all_products(request):
 def product_detail(request, product_id):
     """ A view to show product details """
     product = get_object_or_404(Product, pk=product_id)
+    icons = product.icons.all()
     reviews = product.reviews.all()
     subcategory = product.subcategory
     category = Product.objects.filter(subcategory=subcategory)
     paginator = Paginator(category, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    on_wishlist = False
+    if product.users_wishlist.filter(id=request.user.id).exists():
+        on_wishlist = True
     context = {
         'product' : product,
         'page_obj' : page_obj,
         'reviews' : reviews,
         'reviewed' : False,
+        'icons' : icons,
+        'on_wishlist' : on_wishlist,
         'review_form' : ReviewForm()
     }
     return render(request, 'products/product_detail.html', context)
@@ -106,6 +112,19 @@ def submit_review(request, product_id):
                 data.save()
                 messages.success(request, 'Thank you! Your review has been submitted.')
                 return redirect(reverse('product_detail', args=[product_id]))
+
+# User option to add product to wishlist
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if product.users_wishlist.filter(id=request.user.id).exists():
+        product.users_wishlist.remove(request.user)
+        messages.success(request, product.name + " has been removed from your WishList")
+    else:
+        product.users_wishlist.add(request.user)
+        messages.success(request, "Added " + product.name + " to your WishList")
+    return redirect(reverse('product_detail', args=[product_id]))
+
 
 
 # SuperUser add view functions for Category, Subcategory and Products

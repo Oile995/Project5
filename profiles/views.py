@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
+from products.models import Product
+
 
 @login_required
 def profile(request):
@@ -20,13 +22,15 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
-    
+
+    products_in_wishlist = Product.objects.filter(users_wishlist=request.user)
     orders = profile.orders.all()
     template = 'profiles/profile.html'
     context = {
         'form' : form,
         'orders' : orders,
         'on_profile_page' : True,
+        'products_in_wishlist' : products_in_wishlist,
     }
 
     return render(request, template, context)
@@ -46,3 +50,4 @@ def order_history(request, order_number):
     }
     
     return render(request, template, context)
+
