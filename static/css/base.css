@@ -4,6 +4,7 @@ html {
 
 body {
     background-size: cover;
+    background-color: #007bff;
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Lato';
