@@ -11,9 +11,11 @@ from products.models import Product
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from cart.contexts import cart_contents
-
+from glacial_ac.views import get_subcat
 import stripe
 import json
+nav_subcat = get_subcat()
+
 
 @require_POST
 def cache_checkout_data(request):
@@ -21,9 +23,9 @@ def cache_checkout_data(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            'cart' : json.dumps(request.session.get('cart', {})),
-            'save_info' : request.POST.get('save_info'),
-            'username' : request.user,
+            'cart': json.dumps(request.session.get('cart', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -42,7 +44,7 @@ def checkout(request):
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
-            'country' : request.POST['country'],
+            'country': request.POST['country'],
             'postcode': request.POST['postcode'],
             'town_or_city': request.POST['town_or_city'],
             'street_address1': request.POST['street_address1'],
@@ -68,7 +70,8 @@ def checkout(request):
                         order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your cart wasn't found in our database. "
+                        "One of the products in your cart wasn't \
+                        found in our database. "
                         "Please call us for assistance!")
                     )
                     order.delete()
@@ -76,14 +79,16 @@ def checkout(request):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success',
+                            args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
         cart = request.session.get('cart', {})
         if not cart:
-            messages.error(request, "There's nothing in your cart at the moment!")
+            messages.error(request, "There's nothing in your\
+                            cart at the moment!")
             return redirect(reverse('products'))
 
         current_cart = cart_contents(request)
@@ -95,7 +100,7 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        # Attempt to prefill the form with any info the user maintains in their profile
+    # Attempt to prefill the form with any info the user have in their profile
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -112,21 +117,24 @@ def checkout(request):
                 })
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
-                
+
         else:
             order_form = OrderForm()
-    
+
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
     template = 'checkout/checkout.html'
     context = {
-        'order_form' : order_form,
-        'stripe_public_key' : stripe_public_key,
-        'client_secret' : intent.client_secret,
+        'order_form': order_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        'nav_subcat': nav_subcat,
+
     }
 
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     """
@@ -159,14 +167,14 @@ def checkout_success(request, order_number):
     messages.success(request, f'Order Successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
-        
+
     if 'cart' in request.session:
         del request.session['cart']
     template = 'checkout/checkout_success.html'
     context = {
-        'order' : order,
+        'order': order,
+        'nav_subcat': nav_subcat,
+
     }
 
     return render(request, template, context)
-
-

@@ -5,9 +5,9 @@
           Air Conditioners
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Split-System">Split-System</a>
-          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Multi-Split-System">Multi-Split-System</a>
-          <a class="dropdown-item" href="{% url 'products' %}?subcategory=Portable-Air-Conditioners">Portable-Air-Conditioners</a>
+          {% for nav_cat in nav_subcat %}
+            <a class="dropdown-item" href="{% url 'products' %}?subcategory={{nav_cat}}">{{nav_cat}}</a>
+          {% endfor %}
         </div>
       </li>
       <li class="nav-item dropdown">

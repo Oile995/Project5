@@ -13,8 +13,8 @@
 
 {% block content %}
 
-   <div class="container h-100">
-    <div class="row h-100">
+   <div class="container-fluid">
+    <div class="row">
         <div class="col-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -22,36 +22,49 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner logo-font">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ MEDIA_URL }}home-ac.jpg" alt="First slide">
+                <img class="d-block carousel-image" src="{{ MEDIA_URL }}home-ac.jpg" alt="ACs for your home">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Home setups</h5>
                     <p>For you who are looking for a home air conditioner setup</p>
                   </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="{{ MEDIA_URL }}ac-split.jpg" alt="Second slide">
+                <img class="d-block carousel-image" src="{{ MEDIA_URL }}ac-split.jpg" alt="ACs for your office">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Company setups</h5>
                     <p>For you who are looking for a shared company air conditioner setup</p>
                   </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="{{ MEDIA_URL }}repair.jpg" alt="Third slide">
+                <img class="d-block carousel-image" src="{{ MEDIA_URL }}repair.jpg" alt="Repairs">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Repair</h5>
                     <p>With a purchase of a new AC, 1 year free repairs and maintenance is included!</p>
                   </div>
               </div>
-              {% for product in products %}
               <div class="carousel-item">
-                <img class="d-block w-100" src="{{ product.image.url }}" alt="First slide">
+                <img class="d-block carousel-image" src="{{ MEDIA_URL }}sale.png" alt="Sale offer">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Deal of the month!</h5>
-                    <p>This months deals are out, click here to claim now!</p>
+                    <h5>Sales</h5>
+                    <p>Checkout our current sale!</p>
                   </div>
               </div>
+              {% for product in products %}
+                {% if product.active_deal %}
+                  <div class="carousel-item">
+                    {% if product.image %}
+                        <img class="d-block carousel-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                      {% else %}
+                        <img class="d-block carousel-image" src="{{ MEDIA_URL }}noimage.png" alt="Placeholder image">
+                      {% endif %}
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Deal of the month!</h5>
+                        <p>This months deals are out, click here to claim now!</p>
+                      </div>
+                  </div>
+                {% endif %}
               {% endfor %}
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -65,5 +78,58 @@
           </div>
         </div>
     </div>
+    <div class="col text-center mt-3">
+      <h2 class="logo-font text-black"> See our latest Poducts below</h2>
+      <hr class="w-50 mb-1">
+    </div>
+    <div class="row mt-2">
+      {% for product in products %}
+          <div class="card-deck col-sm-6 col-md-6 col-lg-4 col-xl-3">
+              <div class="card h-100 border-0">
+                  {% if product.image %}
+                      <a class="h-50" href="{% url 'product_detail' product.id %}">
+                          <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                      </a>
+                  {% else %}
+                      <a href="{% url 'product_detail' product.id %}">
+                          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="Placeholder image">
+                      </a>
+                  {% endif %}
+                  <div class="card-body h-50">
+                      <h5 class="card-title">{{product.name}}</h5>
+                      <h6 class="card-title font-weight-bold">{{product.price}}$</h6>
+                      <p class="card-text">{{product.subcategory}}</p>
+                  </div>
+                  <div class="card-footer">
+                      {% if product.rating %}
+                          <small class="text-muted">Rating:  {% include 'products/includes/stars_avrage.html' %}</small>
+                      {% else %}
+                          <small class="text-muted">Not rated yet</small>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+          {% if forloop.counter|divisibleby:1 %}
+          <div class="col-12 d-sm-none mb-5">
+              <hr>
+          </div>
+          {% endif %}                        
+          {% if forloop.counter|divisibleby:2 %}
+              <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                  <hr>
+              </div>
+          {% endif %}
+          {% if forloop.counter|divisibleby:3 %}
+              <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                  <hr>
+              </div>
+          {% endif %}
+          {% if forloop.counter|divisibleby:4 %}
+              <div class="col-12 d-none d-xl-block mb-5">
+                  <hr>
+              </div>
+          {% endif %}
+      {% endfor %}
+  </div>
    </div>
 {% endblock %}

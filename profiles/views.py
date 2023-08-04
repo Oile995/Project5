@@ -6,7 +6,8 @@ from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
 from products.models import Product
-
+from glacial_ac.views import get_subcat
+nav_subcat = get_subcat()
 
 @login_required
 def profile(request):
@@ -31,6 +32,8 @@ def profile(request):
         'orders' : orders,
         'on_profile_page' : True,
         'products_in_wishlist' : products_in_wishlist,
+        'nav_subcat' : nav_subcat,
+
     }
 
     return render(request, template, context)

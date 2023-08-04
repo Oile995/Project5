@@ -12,6 +12,9 @@ from .models import Product, SubCategory, Category, Review
 from .forms import (
     ProductForm, SubCategoryForm, CategoryForm, ReviewForm
 )
+from glacial_ac.views import get_subcat
+nav_subcat = get_subcat()
+
 
 def all_products(request):
     """ A view to show all products """
@@ -53,12 +56,13 @@ def all_products(request):
             products = products.filter(queries)
     
     current_sorting = f'{sort}_{direction}'
-
     context = {
         'products' : products,
         'search_term' : query,
         'current_categories' : subcategories,
         'current_sorting' : current_sorting,
+        'nav_subcat' : nav_subcat,
+
     }
     return render(request, 'products/products.html', context)
 
@@ -83,7 +87,8 @@ def product_detail(request, product_id):
         'reviewed' : False,
         'icons' : icons,
         'on_wishlist' : on_wishlist,
-        'review_form' : ReviewForm()
+        'review_form' : ReviewForm(),
+        'nav_subcat' : nav_subcat,
     }
     return render(request, 'products/product_detail.html', context)
 
@@ -153,6 +158,7 @@ def add_category(request):
     template = 'products/add_category.html'
     context = {
         'form' : form,
+        'nav_subcat' : nav_subcat,
     }
 
     return render(request, template, context)
@@ -179,6 +185,7 @@ def add_subcategory(request):
     template = 'products/add_subcategory.html'
     context = {
         'form' : form,
+        'nav_subcat' : nav_subcat,
     }
 
     return render(request, template, context)
@@ -205,6 +212,7 @@ def add_product(request):
     template = 'products/add_product.html'
     context = {
         'form' : form,
+        'nav_subcat' : nav_subcat,
     }
 
     return render(request, template, context)
@@ -235,6 +243,7 @@ def edit_product(request, product_id):
     context = {
         'form' : form,
         'product' : product,
+        'nav_subcat' : nav_subcat,
     }
 
     return render(request, template, context)

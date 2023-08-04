@@ -174,17 +174,6 @@ input[name='q']::placeholder {
     border-bottom-color: #343a40 !important;
 }
 
-.overlay {
-	height: 100%;
-	width: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	background: white;
-	z-index: -1;
-}
-
-
 /* Allauth form formatting  taken from code-institutes Boutique ado*/
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /*mt-4*/
@@ -270,6 +259,27 @@ input[name='q']::placeholder {
 /* Product details image and icons */
 .error-site{
     margin-top: 500px;
+}
+
+.carousel-caption >h5, p {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 1px 1px white;
+
+}
+.carousel-image {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+}
+
+.carousel-control-next {
+    right: 15%;
+}
+
+.carousel-control-prev {
+    left: 15%;
 }
 
 .description-container{
@@ -452,8 +462,8 @@ input[name='q']::placeholder {
         height: calc(100vh - 116px);
     }
 
-    .display-4.logo-font.text-black {
-        font-size: 2rem;
+    .logo-font.text-black {
+        font-size: 1rem;
     }
 
     .nav-link {
@@ -490,4 +500,17 @@ input[name='q']::placeholder {
     .increment-qty, .decrement-qty {
         padding: .25rem .5rem !important;
     }
+
+    .carousel-image {
+        width: 90%;
+    }
+    
+    .carousel-control-next {
+        right: 5%;
+    }
+    
+    .carousel-control-prev {
+        left: 5%;
+    }
+
 }

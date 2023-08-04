@@ -3,13 +3,17 @@ from django.shortcuts import (
 )
 from django.contrib import messages
 from products.models import Product
-
+from glacial_ac.views import get_subcat
+nav_subcat = get_subcat()
 
 
 def view_cart(request):
     """ A view to reneder shopping cart"""
-    
-    return render(request, 'cart/cart.html')
+    context = {
+        'nav_subcat': nav_subcat,
+    }
+
+    return render(request, 'cart/cart.html', context)
 
 
 def add_to_cart(request, item_id):
@@ -22,12 +26,13 @@ def add_to_cart(request, item_id):
 
     if item_id in list(cart.keys()):
         cart[item_id] += quantity
-        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')
+        messages.success(request, f'Updated {product.name}\
+                                    quantity to {cart[item_id]}')
 
     else:
         cart[item_id] = quantity
         messages.success(request, f'Added {product.name} to your cart!')
-    
+
     request.session['cart'] = cart
     print(request.session['cart'])
     return redirect(redirect_url)
@@ -42,12 +47,13 @@ def adjust_cart(request, item_id):
 
     if quantity > 0:
         cart[item_id] = quantity
-        messages.success(request, f'Updated {product.name} quantity to {cart[item_id]}')
+        messages.success(request, f'Updated {product.name}\
+                                    quantity to {cart[item_id]}')
 
     else:
         cart.pop[item_id]
         messages.info(request, f'You removed {product.name} from your cart!')
-    
+
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
 
@@ -60,7 +66,6 @@ def remove_from_cart(request, item_id):
         cart.pop(item_id)
         messages.info(request, f'You removed {product.name} from your cart!')
 
-    
         request.session['cart'] = cart
         return HttpResponse(status=200)
     except Exception as e:
