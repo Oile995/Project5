@@ -1,10 +1,4 @@
 from django.shortcuts import render
-from products.models import SubCategory
-
-
-def get_subcat():
-    nav_subcat = SubCategory.objects.all()
-    return nav_subcat
 
 
 def handler404(request, exception):

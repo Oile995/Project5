@@ -3,17 +3,11 @@ from django.shortcuts import (
 )
 from django.contrib import messages
 from products.models import Product
-from glacial_ac.views import get_subcat
-nav_subcat = get_subcat()
 
 
 def view_cart(request):
     """ A view to reneder shopping cart"""
-    context = {
-        'nav_subcat': nav_subcat,
-    }
-
-    return render(request, 'cart/cart.html', context)
+    return render(request, 'cart/cart.html')
 
 
 def add_to_cart(request, item_id):

@@ -93,7 +93,7 @@
                             <p class="card-text">{{product.subcategory}}</p>
                         </div>
                         <div class="card-footer">
-                            {% if product.rating %}
+                            {% if product.countReview %}
                                 <small class="text-muted">Rating:  {% include 'products/includes/stars_avrage.html' %}</small>
                             {% else %}
                                 <small class="text-muted">Not rated yet</small>

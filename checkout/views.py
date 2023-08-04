@@ -11,10 +11,8 @@ from products.models import Product
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from cart.contexts import cart_contents
-from glacial_ac.views import get_subcat
 import stripe
 import json
-nav_subcat = get_subcat()
 
 
 @require_POST
@@ -129,8 +127,6 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-        'nav_subcat': nav_subcat,
-
     }
 
     return render(request, template, context)
@@ -173,8 +169,6 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'nav_subcat': nav_subcat,
-
     }
 
     return render(request, template, context)
