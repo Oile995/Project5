@@ -25,6 +25,7 @@
     {% block corecss %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+        <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
@@ -119,11 +120,11 @@
     </script>
     {% endblock %}
     <footer class="bg-dark text-center text-lg-start text-white mt-auto">
+    <!-- Contact -->
     <div class="container p-4">
       <div class="row mt-4">
-        <div class="col-lg-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Contact us</h5>
-
+        <div class="col-lg-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-lg-5">Contact us</h5>
           <ul class="list-unstyled">
             <li>
               <a href="mailto:glacialac.sweden@gmail.com" class="text-white"><i class="fas fa-at fa-fw fa-sm me-2"></i>Email</a>
@@ -136,15 +137,66 @@
             </li>
           </ul>
         </div>
+        <!-- Mailchimp Newsletter signup -->
+        <div class="col-lg-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase text-lg-left">Signup to our newsletter!<span><i class="fas fa-envelope fa-fw fa-sm me-2"></i></span></h5>
+          <div id="mc_embed_shell">
+            <div id="mc_embed_signup">
+              <form action="https://herokuapp.us21.list-manage.com/subscribe/post?u=47328818d095f03fe9206039c&amp;id=a77eda8300&amp;f_id=00e42fe7f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                <div id="mc_embed_signup_scroll">
+                  <div class="mc-field-group">
+                    <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                    <input type="email" name="EMAIL" class="required email w-50" id="mce-EMAIL" required="" value="">
+                    <span id="mce-EMAIL-HELPERTEXT" class="helper_text w-50"></span>
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                    <div class="response" id="mce-error-response" style="display: none;"></div>
+                    <div class="response" id="mce-success-response" style="display: none;"></div>
+                  </div>
+                  <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+                    <input type="text" name="b_47328818d095f03fe9206039c_a77eda8300" tabindex="-1" value="">
+                  </div>
+                  <div class="optionalParent">
+                    <div class="clear foot">
+                      <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button bg-white text-black" value="Subscribe">
+                      <p style="margin: 0px auto;"><a href="http://eepurl.com/iw-Z76" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-      © 2023 Copyright:
-      <a class="text-white" href="https://github.com/Oile995/Project5" target="_blank" rel="nofollow">Oscar Eriksson</a>
-    </div>
-    <!-- Copyright -->
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2023 Copyright:
+        <a class="text-white" href="https://github.com/Oile995/Project5" target="_blank" rel="nofollow">Oscar Eriksson</a>
+      </div>
+      <!-- Copyright -->
     </footer>
     </wrapper>
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+        (function($) {
+            window.fnames = new Array();
+            window.ftypes = new Array();
+            fnames[0]='EMAIL';
+            ftypes[0]='email';
+            fnames[1]='FNAME';
+            ftypes[1]='text';
+            fnames[2]='LNAME';
+            ftypes[2]='text';
+            fnames[3]='ADDRESS';
+            ftypes[3]='address';
+            fnames[4]='PHONE';
+            ftypes[4]='phone';
+            fnames[5]='BIRTHDAY';
+            ftypes[5]='birthday';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
+    </script>
   </body>
 </html>

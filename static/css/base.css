@@ -266,6 +266,7 @@ input[name='q']::placeholder {
 
 /*  All css below up to media queries are not from Code-institute */
 /* Product details image and icons */
+
 .error-site{
     margin-top: 500px;
 }
@@ -323,6 +324,12 @@ input[name='q']::placeholder {
 
 .site-logo {
     height: 4vw;
+}
+
+/* Mailchimp */
+
+#mc_embed_signup {
+
 }
 
 /* ================= RATINGS ============== */
