@@ -13,8 +13,8 @@
     <div class="overlay"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-lg-5 ">
-                <div class="image-container mx-auto border border-dark mt-5 mb-2">
+            <div class="col-12 col-lg-5">
+                <div class="image-container mx-auto mt-5 mb-2">
                     {% if product.image %}
                         <a class="h-50" href="{{ product.image.url }}" target="_blank">
                             <img class="card-img-top img-fluid max-width: 75%; height: 50%;" src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -25,7 +25,7 @@
                         </a>
                     {% endif %}
                 </div>
-                <h2 class="text-center">{{ product.name }}</h2>
+                <h2 class="text-center ">{{ product.name }}</h2>
                 <h5 class="font-weight-bold"> Price: {{product.price}}$ </h5>
                 <h6 class="font-weight-bold"> Stock: {{product.stock}} </h6>
                 <!-- Star Rating Code taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/templates/store/product_detail.html -->
@@ -109,16 +109,16 @@
             </div>
             <div class="col-12 col-lg-3 my-5">
                 <div class="description-container my-2 h-50">
-                    <div> <span class="font-weight-bold">Description:</span></div>
-                    <p class="text-dark">
+                    <div> <span class="font-weight-bold"></span></div>
+                    <p class="description-text">
                         {{product.description | safe}}
                     </p>
                 </div>
-                <div class="description-container border border-dark my-3 h-50">
+                <div class="my-3 h-50">
                     <row class="icon-container">
                         {% for icon in icons %}
-                        <div class="col-2 product-icon">
-                            <img class="card-img-top img-fluid icon-hover " src="{{ icon.image.url }}" data-toggle="tooltip" title="{{ icon.hover_text }}">
+                        <div class="col-3">
+                            <img class="icon-hover product-icon" src="{{ icon.image.url }}" data-toggle="tooltip" title="{{ icon.hover_text }}">
                         </div>
                         {% endfor %}
                     </row>
@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-3">
-                <div class="video-container my-5 h-75 border border-dark">
+                <div class="video-container my-5 h-75 ">
                     <div> <span class="font-weight-bold">Specifications:</span></div>
                     {{product.specification | safe}}                 
                 </div>
@@ -137,47 +137,55 @@
             <div class="col-12 col-lg-6">
                 <h4>Other products in the same category:</h4>
                 <div class="row">
-                {% for p in page_obj %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="image-container">
-                                {% if not p.image %}
-                                <img class="card-img-top"
-                                    src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image of barbell">
+                    {% for product in related_products %}
+                        <div class="card-deck col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                            <div class="card h-100 border-0">
+                                {% if product.image %}
+                                    <a class="h-50" href="{% url 'product_detail' product.id %}">
+                                        <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                                    </a>
                                 {% else %}
-                                <img class="card-img-top" src=" {{ p.image.url }}" alt="User choosen workout image">
+                                    <a href="{% url 'product_detail' product.id %}">
+                                        <img class="card-img-top img-fluid" src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image">
+                                    </a>
                                 {% endif %}
-                                <div class="image-flash">
-                                    <p class="author">Category: {{ p.subcategory }}</p>
+                                <div class="card-body h-50">
+                                    <h5 class="card-title">{{product.name}}</h5>
+                                    <h6 class="card-title font-weight-bold">{{product.price}}$</h6>
+                                    <p class="card-text">{{product.subcategory}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    {% if product.rating %}
+                                        <small class="text-muted">Rating:  {% include 'products/includes/stars_avrage.html' %}</small>
+                                    {% else %}
+                                        <small class="text-muted">Not rated yet</small>
+                                    {% endif %}
                                 </div>
                             </div>
-                            <a href="" class="workout-link">
-                                <h2 class="card-title">{{ p.name }}</h2>
-                            </a>
+                        </div>
+                        {% if forloop.counter|divisibleby:1 %}
+                        <div class="col-12 d-sm-none mb-5">
                             <hr>
                         </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:3 %}
-                </div>
-                <div class="row">
-                {% endif %}
-                {% endfor %}
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
-            {% if is_paginated %}
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-                    {% endif %}
-                    {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-            {% endif %}
             <div class="col-12 col-lg-5 offset-1 h-50">
                 <form action="{% url 'submit_review' product.id %}" method="POST">
 					{% csrf_token %}
@@ -248,10 +256,22 @@
             </div>
         </div>
     </div>
+    <div class="btt-button shadow-sm rounded-0 border border-black">
+        <a class="btt-link d-flex h-100">
+            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+        </a>	
+    </div>
 {% endblock %}
 
+
 {% block postloadjs %}
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+
+    {% include 'products/includes/quantity_input_script.html' %}
 
 {% endblock %}

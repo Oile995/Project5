@@ -21,7 +21,7 @@ def all_products(request):
 
     products = Product.objects.all()
     query = None
-    subcategories= None
+    subcategories = None
     sort = None
     direction = None
 
@@ -40,28 +40,30 @@ def all_products(request):
                     sortkey = f'-{sortkey}'
             products = products.order_by(sortkey)
 
-        # Handels Subcategory selection and returns subcategory and all products in it
+        # Handels Subcategory selection and returns
+        # subcategory and all products in it
         if 'subcategory' in request.GET:
             subcategories = request.GET['subcategory'].split(',')
             products = products.filter(subcategory__name__in=subcategories)
             subcategories = SubCategory.objects.filter(name__in=subcategories)
 
-        # Handels search query in searchbar and returns products fitting that search
+        # Handels search query in searchbar and returns
+        # products fitting that search
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(request, "You didn't enter any search criteria")
                 return redirect(reverse('products'))
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
-    
+
     current_sorting = f'{sort}_{direction}'
     context = {
-        'products' : products,
-        'search_term' : query,
-        'current_categories' : subcategories,
-        'current_sorting' : current_sorting,
-        'nav_subcat' : nav_subcat,
+        'products': products,
+        'search_term': query,
+        'current_categories': subcategories,
+        'current_sorting': current_sorting,
+        'nav_subcat': nav_subcat,
 
     }
     return render(request, 'products/products.html', context)
@@ -70,25 +72,23 @@ def all_products(request):
 def product_detail(request, product_id):
     """ A view to show product details """
     product = get_object_or_404(Product, pk=product_id)
+    related_products = Product.objects.filter(subcategory=product.subcategory).order_by('-id')[:4]
     icons = product.icons.all()
     reviews = product.reviews.all()
     subcategory = product.subcategory
     category = Product.objects.filter(subcategory=subcategory)
-    paginator = Paginator(category, 3)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
     on_wishlist = False
     if product.users_wishlist.filter(id=request.user.id).exists():
         on_wishlist = True
     context = {
-        'product' : product,
-        'page_obj' : page_obj,
-        'reviews' : reviews,
-        'reviewed' : False,
-        'icons' : icons,
-        'on_wishlist' : on_wishlist,
-        'review_form' : ReviewForm(),
-        'nav_subcat' : nav_subcat,
+        'product': product,
+        'related_products': related_products,
+        'reviews': reviews,
+        'reviewed': False,
+        'icons': icons,
+        'on_wishlist': on_wishlist,
+        'review_form': ReviewForm(),
+        'nav_subcat': nav_subcat,
     }
     return render(request, 'products/product_detail.html', context)
 
@@ -99,18 +99,23 @@ def submit_review(request, product_id):
     """
     Submitting New and updating old Reviews depending on user.
     Updating comment and rating.
-    Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/store/views.py
+    Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy\
+                                                /blob/main/store/views.py
     """
     if request.method == 'POST':
         try:
             product = get_object_or_404(Product, pk=product_id)
-            review = Review.objects.get(user__id=request.user.id, product__id=product_id)
+            review = Review.objects.get(user__id=request.user.id,
+                                        product__id=product_id)
             form = ReviewForm(request.POST, instance=review)
             form.save()
-            messages.success(request, 'Thank you! Your review has been updated.')
-            return HttpResponseRedirect(reverse('product_detail', args=[product.id]))#redirect(reverse('product_detail'))
+            messages.success(request,
+                             'Thank you! Your review has been updated.')
+            return HttpResponseRedirect(reverse('product_detail',
+                                                args=[product.id]))
 
         except Review.DoesNotExist:
+            product = get_object_or_404(Product, pk=product_id)
             form = ReviewForm(request.POST)
             if form.is_valid():
                 data = Review()
@@ -119,8 +124,10 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
                 data.save()
-                messages.success(request, 'Thank you! Your review has been submitted.')
+                messages.success(request,
+                                 'Thank you! Your review has been submitted.')
                 return redirect(reverse('product_detail', args=[product_id]))
+
 
 # User option to add product to wishlist
 @login_required
@@ -128,12 +135,12 @@ def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     if product.users_wishlist.filter(id=request.user.id).exists():
         product.users_wishlist.remove(request.user)
-        messages.success(request, product.name + " has been removed from your WishList")
+        messages.success(request,
+                         product.name + " has been removed from your WishList")
     else:
         product.users_wishlist.add(request.user)
-        messages.success(request, "Added " + product.name + " to your WishList")
+        messages.success(request, "Added " + product.name + "to your WishList")
     return redirect(reverse('product_detail', args=[product_id]))
-
 
 
 # SuperUser add view functions for Category, Subcategory and Products
@@ -143,7 +150,7 @@ def add_category(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -151,14 +158,16 @@ def add_category(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('add_category'))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            messages.error(request,
+                           'Failed to add product.\
+                           Please ensure the form is valid.')
     else:
         form = CategoryForm()
 
     template = 'products/add_category.html'
     context = {
-        'form' : form,
-        'nav_subcat' : nav_subcat,
+        'form': form,
+        'nav_subcat': nav_subcat,
     }
 
     return render(request, template, context)
@@ -170,7 +179,7 @@ def add_subcategory(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     if request.method == 'POST':
         form = SubCategoryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -178,14 +187,15 @@ def add_subcategory(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('add_subcategory'))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to add product.\
+                                    Please ensure the form is valid.')
     else:
         form = SubCategoryForm()
 
     template = 'products/add_subcategory.html'
     context = {
-        'form' : form,
-        'nav_subcat' : nav_subcat,
+        'form': form,
+        'nav_subcat': nav_subcat,
     }
 
     return render(request, template, context)
@@ -205,14 +215,15 @@ def add_product(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to add product.\
+                                    Please ensure the form is valid.')
     else:
         form = ProductForm()
 
     template = 'products/add_product.html'
     context = {
-        'form' : form,
-        'nav_subcat' : nav_subcat,
+        'form': form,
+        'nav_subcat': nav_subcat,
     }
 
     return render(request, template, context)
@@ -234,16 +245,17 @@ def edit_product(request, product_id):
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to update product.\
+                                    Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
 
     template = 'products/edit_product.html'
     context = {
-        'form' : form,
-        'product' : product,
-        'nav_subcat' : nav_subcat,
+        'form': form,
+        'product': product,
+        'nav_subcat': nav_subcat,
     }
 
     return render(request, template, context)

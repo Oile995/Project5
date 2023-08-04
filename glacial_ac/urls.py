@@ -17,6 +17,6 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-#Error handling
+# Error handling
 handler404 = 'glacial_ac.views.handler404'
 handler500 = 'glacial_ac.views.handler500'

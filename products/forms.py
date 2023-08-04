@@ -7,15 +7,12 @@ from django_summernote.fields import (
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
-
-
 class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
         fields = '__all__'
-    
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -28,7 +25,7 @@ class SubCategoryForm(forms.ModelForm):
     class Meta:
         model = SubCategory
         fields = '__all__'
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         categories = Category.objects.all()
@@ -46,7 +43,8 @@ class ProductForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('rating', 'users_wishlist', 'image_url',)
     # Form fields requiring widgets
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
+    image = forms.ImageField(label='Image', required=False,
+                             widget=CustomClearableFileInput)
     description = forms.CharField(widget=SummernoteWidget())
     specification = forms.CharField(widget=SummernoteWidget())
 

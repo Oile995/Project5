@@ -18,7 +18,6 @@ class ProductAdmin(SummernoteModelAdmin):
         'sku',
         'subcategory',
         'price',
-        'rating',
         'image',
     )
     search_fields = ['name', 'subcategory', 'active_deal']
@@ -39,6 +38,7 @@ class IconAdmin(admin.ModelAdmin):
         'hover_text',
         'image',
     )
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)

@@ -5,15 +5,14 @@ from django.utils.text import slugify
 from django.db.models import Avg, Count
 
 
-
-HOMEPAGE_DEAL = ((0, "Not visable in Homepage carousel"), (1, "Visable in Homepage carousel"))
+HOMEPAGE_DEAL = ((0, "Not visable in Homepage carousel"),
+                 (1, "Visable in Homepage carousel"))
 
 
 class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
-
 
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
@@ -30,8 +29,8 @@ class SubCategory(models.Model):
     class Meta:
         verbose_name_plural = 'SubCategories'
 
-
-    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, null=True,
+                                 on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
@@ -52,8 +51,10 @@ class Icon(models.Model):
 
 
 class Product(models.Model):
-    subcategory = models.ForeignKey(SubCategory, null=True, on_delete=models.SET_NULL)
-    sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
+    subcategory = models.ForeignKey(SubCategory, null=True,
+                                    on_delete=models.SET_NULL)
+    sku = models.CharField(max_length=254, null=True, blank=True,
+                           editable=False)
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True, editable=False)
     brand = models.CharField(max_length=254)
@@ -71,15 +72,15 @@ class Product(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     active_deal = models.IntegerField(choices=HOMEPAGE_DEAL, default=0)
-    users_wishlist = models.ManyToManyField(User, related_name="user_wishlist", blank=True)
+    users_wishlist = models.ManyToManyField(User, related_name="user_wishlist",
+                                            blank=True)
     icons = models.ManyToManyField(Icon, related_name="icon", blank=True)
-
 
     def generate_sku(self):
         """
         Helper function to generate a SKU,
         rgo = first 3 char in brand name
-        ctg = category 
+        ctg = category
         sctg = subcategory
         cs = product name
         """
@@ -101,19 +102,22 @@ class Product(models.Model):
         return generated_sku
 
     # auto-set slug as name with slugify
-    # from https://stackoverflow.com/questions/50436658/how-to-auto-generate-slug-from-my-album-model-in-django-2-0-4
+    # from https://stackoverflow.com/questions/50436658/how-to-auto-\
+    # generate-slug-from-my-album-model-in-django-2-0-4
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         if not self.sku:
             self.sku = self.generate_sku()
         super(Product, self).save(*args, **kwargs)
 
-    # Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/store/models.py
+    # Taken from https://github.com/dev-rathankumar/greatkart-pre-\
+    # deploy/blob/main/store/models.py
     def averageReview(self):
         reviews = Review.objects.filter(product=self).aggregate(average=Avg('rating'))
         avg = 0
         if reviews['average'] is not None:
             avg = float(reviews['average'])
+        self.rating = avg
         return avg
 
     def countReview(self):
@@ -129,14 +133,11 @@ class Product(models.Model):
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='reviews')
     rating = models.FloatField()
     comment = models.TextField(max_length=500, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return f"{self.comment}: {self.rating}: {self.product.name}"
-
-
-

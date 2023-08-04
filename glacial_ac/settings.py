@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
-     import env
+    import env
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,7 +28,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['glacial-ac-d07dd9f0063c.herokuapp.com', 'localhost', "8000-oile995-project5-5km12b59zpu.ws-eu102.gitpod.io"]
+ALLOWED_HOSTS = ['glacial-ac-d07dd9f0063c.herokuapp.com', 'localhost',
+                 '8000-oile995-project5-5km12b59zpu.ws-eu102.gitpod.io']
 
 
 # Application definition
@@ -87,7 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'cart.contexts.cart_contents',
             ],
-            'builtins' : [
+            'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
                 'crispy_forms.templatetags.crispy_forms_field',
             ]
@@ -135,10 +136,6 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
-
-
-
 
 
 # Password validation

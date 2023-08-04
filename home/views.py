@@ -10,8 +10,8 @@ def index(request):
     products = Product.objects.all().order_by('-id')[:4]
 
     context = {
-        'products' : products,
-        'nav_subcat' : nav_subcat,
+        'products': products,
+        'nav_subcat': nav_subcat,
     }
 
     return render(request, 'home/index.html', context)

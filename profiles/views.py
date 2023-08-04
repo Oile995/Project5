@@ -9,6 +9,7 @@ from products.models import Product
 from glacial_ac.views import get_subcat
 nav_subcat = get_subcat()
 
+
 @login_required
 def profile(request):
     """ Display the user profile """
@@ -20,7 +21,8 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated Successfully')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            messages.error(request, 'Update failed. Please ensure\
+                                                    the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
 
@@ -28,15 +30,16 @@ def profile(request):
     orders = profile.orders.all()
     template = 'profiles/profile.html'
     context = {
-        'form' : form,
-        'orders' : orders,
-        'on_profile_page' : True,
-        'products_in_wishlist' : products_in_wishlist,
-        'nav_subcat' : nav_subcat,
+        'form': form,
+        'orders': orders,
+        'on_profile_page': True,
+        'products_in_wishlist': products_in_wishlist,
+        'nav_subcat': nav_subcat,
 
     }
 
     return render(request, template, context)
+
 
 def order_history(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
@@ -48,9 +51,8 @@ def order_history(request, order_number):
 
     template = 'checkout/checkout_success.html'
     context = {
-        'order' : order,
-        'from_profile' : True,   
+        'order': order,
+        'from_profile': True,
     }
-    
-    return render(request, template, context)
 
+    return render(request, template, context)
