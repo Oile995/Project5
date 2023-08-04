@@ -58,8 +58,8 @@ class Product(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True, editable=False)
     brand = models.CharField(max_length=254)
-    description = models.CharField(max_length=400)
-    specification = models.CharField(max_length=400)
+    description = models.CharField(max_length=500)
+    specification = models.CharField(max_length=1000)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     stock = models.IntegerField(
         default=1,
