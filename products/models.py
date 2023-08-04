@@ -124,7 +124,7 @@ class Product(models.Model):
         return count
 
     def __str__(self):
-        return f"{self.name}: {self.description}: {self.averageReview()}"
+        return f"{self.name}"
 
 
 class Review(models.Model):
@@ -136,7 +136,7 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return f"{self.comment}: {self.rating}"
+        return f"{self.comment}: {self.rating}: {self.product.name}"
 
 
 

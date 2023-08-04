@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404
+)
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -7,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Product, SubCategory, Category, Review
-from .forms import ProductForm, SubCategoryForm, CategoryForm, ReviewForm
+from .forms import (
+    ProductForm, SubCategoryForm, CategoryForm, ReviewForm
+)
 
 def all_products(request):
     """ A view to show all products """
