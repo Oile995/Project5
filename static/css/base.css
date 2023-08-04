@@ -312,6 +312,10 @@ input[name='q']::placeholder {
     width: 100%;
 }
 
+.site-logo {
+    height: 4vw;
+}
+
 /* ================= RATINGS ============== */
 /* Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/templates/store/product_detail.html */
 .label-rating {
@@ -426,7 +430,7 @@ input[name='q']::placeholder {
           z-index: 1030;
       }
       .header-container {
-          padding-top: 164px;
+          padding-top: 220px;
       }
   }
 
@@ -460,7 +464,13 @@ input[name='q']::placeholder {
     body {
         height: calc(100vh - 116px);
     }
-
+    #main-nav {
+        font-size: 0.65rem;
+    }
+    .product-titel {
+        margin-top: 30px;
+    }
+    
     .logo-font.text-black {
         font-size: 1rem;
     }

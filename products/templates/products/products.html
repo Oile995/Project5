@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <!-- Displaying Current category selected or all Products -->
         <div class="row">
-            <div class="col text-center mt-3">
+            <div class="col text-center">
                 {% if current_categories %}
                     <h2 class="logo-font">  {{current_categories.first}}</h2>
                     <hr class="w-50 mb-1">
@@ -57,7 +57,7 @@
                         <div class="card-deck col-sm-6 col-md-6 col-lg-4 col-xl-3">
                             <div class="card h-100 border-0">
                                 {% if product.image %}
-                                    <a class="h-50" href="{% url 'product_detail' product.id %}">
+                                    <a class="h-70" href="{% url 'product_detail' product.id %}">
                                         <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                                     </a>
                                 {% else %}
@@ -65,7 +65,7 @@
                                         <img class="card-img-top img-fluid" src="https://www.netonnet.se/GetFile/ProductImagePrimary/hem-fritid/klimat-varme/luftkonditionering/andersson-x-arc-1-5(X1020673)_494266_2_Normal_Large.webp" alt="Placeholder image">
                                     </a>
                                 {% endif %}
-                                <div class="card-body h-50">
+                                <div class="card-body h-20">
                                     <h5 class="card-title">{{product.name}}</h5>
                                     <h6 class="card-title font-weight-bold">{{product.price}}$</h6>
                                     <p class="card-text">{{product.subcategory}}</p>

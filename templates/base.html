@@ -13,6 +13,13 @@
     {% endblock %}
 
     {% block extra_meta %}
+        <meta name="author" content="Oscar Eriksson">
+        <meta name="description"
+            content="Get your next Air-conditioner or Air-Purifier from us. We offer top of the market products to affordable prices!
+            Order today and get your new AC or Purifier installed.">
+        <meta name="keywords"
+            content="GlacialAC Glacial Ac Air-conditioner Air-Purifier split-system multi-split-system portable AC-service 
+            ecommerce webshop webstore shipping order facebook-group email cool air heating cooling moisturizing Midea Toshiba Tesla Vivax Xiaomi .">
     {% endblock %}
 
     {% block corecss %}
@@ -41,12 +48,12 @@
   <body>
     <header class="container-fluid fixed-top">
       <div id="topnav" class="row bg-white pt-lg-2 d-none d-sm-flex">
-          <div class="col-12 col-sm-6 col-md-4 my-auto py-1 py-lg-0 text-center text-md-left">
+          <div class="col-12 col-sm-4 col-md-4 my-auto py-1 py-lg-0 text-center text-md-left">
               <a href="{% url 'home' %}" class="nav-link main-logo-link">
-              <h2 class="logo-font text-dark my-0 font-italic"><strong>Glacial</strong> AC</h2>
+              <img class="site-logo" src="{{ MEDIA_URL }}glacial_ac.png" alt="Glaical AC logo">
               </a>
           </div>
-          <div class="col-12 col-sm-2 my-auto py-1 py-lg-0 text-center text-lg-left">
+          <div class="col-12 col-sm-4 col-md-2 my-auto py-1 py-lg-0 text-center text-lg-left">
               <form method="GET" action="{% url 'products' %}">
                 <div class="input-group w-100">
                     <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
