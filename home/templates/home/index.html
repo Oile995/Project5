@@ -87,15 +87,15 @@
           <div class="card-deck col-sm-6 col-md-6 col-lg-4 col-xl-3">
               <div class="card h-100 border-0">
                   {% if product.image %}
-                      <a class="h-50" href="{% url 'product_detail' product.id %}">
+                      <a class="h-70" href="{% url 'product_detail' product.id %}">
                           <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
                       </a>
                   {% else %}
-                      <a href="{% url 'product_detail' product.id %}">
+                      <a class="h-70" href="{% url 'product_detail' product.id %}">
                           <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="Placeholder image">
                       </a>
                   {% endif %}
-                  <div class="card-body h-50">
+                  <div class="card-body h-20">
                       <h5 class="card-title">{{product.name}}</h5>
                       <h6 class="card-title font-weight-bold">{{product.price}}$</h6>
                       <p class="card-text">{{product.subcategory}}</p>

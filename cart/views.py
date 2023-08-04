@@ -45,7 +45,7 @@ def adjust_cart(request, item_id):
                                     quantity to {cart[item_id]}')
 
     else:
-        cart.pop[item_id]
+        cart.pop(item_id)
         messages.info(request, f'You removed {product.name} from your cart!')
 
     request.session['cart'] = cart

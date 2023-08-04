@@ -134,9 +134,9 @@
     // Remove item and reload on click
     $('.remove-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
-        var itemId = $(this).attr('id').split('remove_')[1];
+        var itemId = $(this).attr('class').split('remove_')[1];
         var url = `/cart/remove/${itemId}/`;
-        var data = {'csrfmiddlewaretoken': csrfToken, 'size':size};
+        var data = {'csrfmiddlewaretoken': csrfToken};
         console.log(url);
         console.log(data);
 
