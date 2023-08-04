@@ -9,3 +9,6 @@
 
  - Footer example
  https://mdbootstrap.com/
+
+ - Footer fixed position logic
+ https://medium.com/@MadTinez/bootstrap-4-footer-at-bottom-not-sticky-dynamic-footer-height-b37ccec837e2
