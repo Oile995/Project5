@@ -9,6 +9,16 @@ body {
     font-family: 'Lato';
 }
 
+/* Footer positon logic taken from: */
+/* https://medium.com/@MadTinez/bootstrap-4-footer-at-bottom-not-sticky-dynamic-footer-height-b37ccec837e2 */
+body, wrapper {
+    min-height:100vh;
+ }
+ 
+.flex-fill {
+    flex:1 1 auto;
+ }
+
 /* from Bulma */
 .icon {
     align-items: center;
@@ -108,8 +118,7 @@ input[name='q']::placeholder {
 /* Toast  */
 .message-container {
     position: relative;
-    top:15%;
-    left: 50%;
+    margin-top: 10%;
     transform: translate(-5%, 0);
     z-index: 99999999999;
 }
