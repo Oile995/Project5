@@ -326,11 +326,8 @@ input[name='q']::placeholder {
     height: 4vw;
 }
 
-/* Mailchimp */
 
-#mc_embed_signup {
 
-}
 
 /* ================= RATINGS ============== */
 /* Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/templates/store/product_detail.html */
@@ -476,7 +473,6 @@ input[name='q']::placeholder {
     .header-container {
         padding-top: 116px;
     }
-
     body {
         height: calc(100vh - 116px);
     }
