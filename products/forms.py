@@ -43,8 +43,7 @@ class ProductForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('rating', 'users_wishlist', 'image_url',)
     # Form fields requiring widgets
-    image = forms.ImageField(label='Image', required=False,
-                             widget=CustomClearableFileInput)
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
     description = forms.CharField(widget=SummernoteWidget())
     specification = forms.CharField(widget=SummernoteWidget())
 

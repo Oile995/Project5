@@ -94,8 +94,8 @@ def submit_review(request, product_id):
     """
     Submitting New and updating old Reviews depending on user.
     Updating comment and rating.
-    Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy\
-                                                /blob/main/store/views.py
+    Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy
+                /blob/main/store/views.py
     """
     if request.method == 'POST':
         try:
@@ -154,8 +154,7 @@ def add_category(request):
             return redirect(reverse('add_category'))
         else:
             messages.error(request,
-                           'Failed to add product.\
-                           Please ensure the form is valid.')
+                           'Failed to add product. Please ensure the form is valid.')
     else:
         form = CategoryForm()
 
@@ -181,8 +180,7 @@ def add_subcategory(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('add_subcategory'))
         else:
-            messages.error(request, 'Failed to add product.\
-                                    Please ensure the form is valid.')
+            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
     else:
         form = SubCategoryForm()
 
@@ -208,8 +206,7 @@ def add_product(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product.\
-                                    Please ensure the form is valid.')
+            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
     else:
         form = ProductForm()
 
@@ -237,8 +234,7 @@ def edit_product(request, product_id):
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product.\
-                                    Please ensure the form is valid.')
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')

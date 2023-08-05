@@ -117,8 +117,7 @@ input[name='q']::placeholder {
 
 /* Toast  */
 .message-container {
-    position: relative;
-    margin-top: 10%;
+    position: static;
     transform: translate(-5%, 0);
     z-index: 99999999999;
 }
@@ -271,7 +270,13 @@ input[name='q']::placeholder {
     margin-top: 500px;
 }
 
-.carousel-caption >h5, p {
+.carousel-caption > h5 {
+    color: #000;
+    font-weight: bold;
+    text-shadow: 1px 1px white;
+
+}
+.carousel-caption > p {
     color: #000;
     font-weight: bold;
     text-shadow: 1px 1px white;
