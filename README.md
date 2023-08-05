@@ -239,6 +239,7 @@ User 2: Work/office owners that require Air-conditioner/Purifier solutions.
 User 3: Store owners that require Air-conditioner/Purifier solutions. 
 
 User 4: Keeper of public places (hospitals, townhall, etc) that require Air-conditioner/Purifier solutions. 
+
 ---
 
 ####  Goals for the website
@@ -358,27 +359,26 @@ The full breakdown of user stories and tasks are included on the project board a
 
 The Desktop navigation was based on Boutique Ado and seemed like a concise and clear option for an e-commerce store. 
 
-![Navbar Desktop](media/readme/navbar-desktop.png)
+![Navbar Desktop](media/readme/Profile-page-nav.PNG)
 
 Mobile Navigation
   
-![Navbar Mobile](media/readme/mobile-nav.png)
+![Navbar Mobile](media/readme/mobile-nav-cart.PNG)
 
-![Mobile Navbar Expanded](media/readme/mobile-nav-expanded.png)
+Sorting, searching and category selection in nav bar
+
+![Navbar Mobile](media/readme/sorting-products.PNG)
+
+![Navbar Mobile](media/readme/category.PNG)
+
+Product management if logged in as superuser
+
+![Navbar Mobile](media/readme/product-management.PNG)
+
   
 When developing this application I decided I wanted to add a detailed footer as would be found on most e-commerce websites.
-![Footer](media/readme/footer.png)
 
-</details>
-
-<details>
-<summary> Authentication </summary>
-<br>
-
-The authentication flows come from Allauth and have been styled to fit the theme of my website. At present when a user signs up a confirmation email is sent to their email address to confirm it before being able to access their account. Unfortunately due to gmail authentication issues preventing emails from being sent from the deployed project at this moment in time, new users cannot authenticate on their own. Will revisit this issue to resolve.
-![Sign Up](media/readme/sign-up.png)
-
-![Login](media/readme/login.png)
+![Footer](media/readme/cart-footer.PNG)
 
 </details>
 
@@ -388,13 +388,16 @@ The authentication flows come from Allauth and have been styled to fit the theme
 
 The products page is responsive to allow equal spacing between products regardless of screen width.
   
-Out of stock products do not show up to customers but in the event that the customer somehow gets access to a product that is out of stock, the add to card button is disabled to prevent out of stock purchases.
-  
-![Products Page](media/readme/products-page.png)
+![Products Page](media/readme/product-details-view.PNG)
 
-The product detail page was intended to include a reviews option for logged in users who also purchased the specific product. As you can see an option on the order model of is_ordered set as a boolean value that would be triggered on order completion and added to users profile. This functionality is not in place in this iteration of the project but will be added in the next iteration. From there the reviews rating would be calculated based on the average score of reviews.
+In Product details users have wishlist toggle button and superuser have delete+edit buttons.
 
-![Products Details](media/readme/product-details.png)
+![Products Details](media/readme/crud-wishlist.PNG)
+
+User can see similar products at he bottom and next to it reviews as well as adding one if logged in
+
+![Products Details](media/readme/similar-products-review.PNG)
+
 
 </details>
 
@@ -402,11 +405,11 @@ The product detail page was intended to include a reviews option for logged in u
 <summary> Cart & Checkout Flow </summary>
 <br>
 
-![Cart Page](media/readme/cart-page.png)
+![Cart Page](media/readme/cart-footer.PNG)
 
-![Checkout Page](media/readme/checkout-page.png)
+![Checkout Page](media/readme/checkout-form.PNG)
 
-![Payment Success Page](media/readme/payment-success-page.png)
+![Payment Success Page](media/readme/success.PNG)
   
 Once the customer makes a successful paymeent they are redirected to the payment success page where they see a summary of their order. 
 
@@ -417,102 +420,22 @@ Once the customer makes a successful paymeent they are redirected to the payment
 <summary> Account Profiles </summary>
 <br>
 
-The account profiles app was designed to make it easy for customers to carry out some basic post order options. 
-The facility to update their account information, change their shipping address or profile photo. Even close their account if they no longer wish to have one.
+The account profiles app was designed to show shipping details, past orders and wishlist.
+The facility to update their account information, change their shipping address.
 
-![Accounts](media/readme/accounts-home.png)
-
-![Shipping Details](media/readme/shipping-info.png)
-
-We allow users to add and update their profile image as we display their image beside their username when they make comments on blog posts. 
-This was intended to create some form of personalisation and encourage people to discuss on the websites soon to be many topics.
-
-![Change Profile Photo](media/readme/change-profile-photo.png)
-
-The customer can visit their order confirmation by clicking on the order number in the order history page. Once directed to this page they will be notified by a pop up message that this is displaying a previous order and not a new one.
-  
-The customer can return to the profile by clicking on the button below the order form.
-
-![Order History](media/readme/order-history.png)
-
-</details>
-
-<details>
-<summary> Blog </summary>
-<br>
-
-The idea behind blogs was to firstly create informative and helpful articles to boost SEO and also to create a place for users to ask questions, share insights and converse with like minded people.  
-
-![Blog Page](media/readme/blog-page.png)
-
-![Blog Details](media/readme/blog-details.png)
-  
-The initial blog articles although basic are the start of what will be expanded on. At present users can comment on blogs and like blog articles. The future features will be added below.
-
-![Blog Comments](media/readme/blog-comments.png)
-
-</details>
-
-<details>
-<summary> Contact Page </summary>
-<br>
-
-![Contact Form](media/readme/contact-form.png)
-  
-The contact form was designed to be a model that sends the message to the backend of the website. In the future I will enable email notifications to the business email address and filter them depending on contact reason. For example if the query selected is complaint then the email will be forwarded to the complaints email address the ensure swift response from the correct employee of the business.
-
-![Contact form Dropdown](media/readme/contact-form-dropdown.png)
+![Accounts](media/readme/profile.PNG)
 
 </details>
 
 
 <details>
-<summary> Account Notifications </summary>
+<summary> Privacy Policy </summary>
 <br>
 
-When a user signs in or out they see a notification like the below to indicate this with the relevant action just taken.
+Privacy policy modal found in footer.
 
-![Sign-in Notification](media/readme/sign-in-notification.png)
-
-If a user navigates from their account profile to the below they are notified as it is reusing the same payment confirmation page once the user makes an order and pays.
-
-![Order History Notification](media/readme/order-history-notification.png)
-
-When a user adds an item to cart they see the below notification.
+![Contact Form](media/readme/privacy-policy.PNG)
   
-![Add to cart notification](media/readme/add-cart-notification.png)
-
-</details>
-
-<details>
-<summary> Admin related permissions </summary>
-<br>
-
-When the superuser logs into the account they have additional front end permissions to edit, delete and add products to the website.
-The edit option and delete options are available on the products page and the add product option is on the product management page on the my account dropdown.
-
-![Admin Product Permissions](media/readme/admin-product-permissions.png)
-
-![Admin Product Add Form](media/readme/admin-product-add-form.png)
-
-</details>
-
-
-<details>
-<summary> Additional Pages </summary>
-<br>
-
-To ensure the page reflects that of a genuine e-commerce page I wanted to include shipping policy's and FAQ's to ensure customers common queries are available.
-  
-![Shipping Policy](media/readme/shipping-policy.png)
-
-![FAQ's](media/readme/sample-faqs.png)
-  
-I have included a subscribe option for customer to provide their emails to be added to mailing lists for offers tips and tricks. This service is provided by mailchimp.
-  
-Initially I was considering creating a subscribe model and attaching it to the userprofile model so they can subscribe and unsub at their leisure but due to time constrainst i decided to go with mailchimp.
-
-![Subscribe](media/readme/subscribe.png)
 
 </details>
 
@@ -520,9 +443,6 @@ Initially I was considering creating a subscribe model and attaching it to the u
 #### Account restrictions:
 
 When an unverified or not logged in user trys to access the accounts section of the site they are notified they do not have permissions and then redirected back to home.
-
-For the short term and to prevent spam, when a non logged in user trys to access the contact form page they are advised to login and redirected back to the home page. This was a personal choice and by design but in the next iteration I would add a "honey pot" type input that is hidden from the front end user. If this option is checked then it would be prevented from being submitted as it would show signs of spam / bot activity.
-
 
 [Back to Top of page](#contents)
 
@@ -636,7 +556,8 @@ Please see a table of acronyms used throughout testing:
 |User can log out of account|Pass|
 |User is notified of logging in to account|Pass|
 |User is notified of logging out of account|Pass|
-|User receives email verification email|Fail|
+|User receives email verification email|Pass|
+|Registration fields have restrictions|Pass|
 
 </details>
 
@@ -658,9 +579,9 @@ Please see a table of acronyms used throughout testing:
 |Logged in User can navigate to the profile section of accounts|Pass|
 |User can access their saved address information|Pass|
 |User can access past orders|Pass|
-|User can access the blog section of the page|Pass|
-|User can access specific blogs|Pass|
-|User can access the contact page and form|Pass|
+|User can access the search for products|Pass|
+|User can access specific categories|Pass|
+|User can filter products|Pass|
 |All links on footer open to correct pages|Pass|
 |All links on Heading Navigation open to correct option|Pass|
 
@@ -678,13 +599,14 @@ Please see a table of acronyms used throughout testing:
 |NLI cannot access profile page| Pass|
 |NLI cannot access admin panel|Pass|
 |NLI cannot access products management|Pass|
-|NLI cannot access the contact form page|Pass|
+|NLI cannot delete or edit products|Pass|
 |NLI cannot leave comments on blog|Pass|
 |LIU cannot access admin panel|Pass|
 |LIU cannot access products management|Pass|
-|LIU can access the contact form page|Pass|
-|LIU cannot edit products|Pass|
-|LIU can leave comments on blog articles|Pass|
+|LIU cannot delete or edit products|Pass|
+|LIU can leave review on products articles|Pass|
+|SUP is the only one that can access admin panel and front end CRUD form|Pass|
+
 
 </details>
 
@@ -699,26 +621,13 @@ Please see a table of acronyms used throughout testing:
 |NLI cannot access profile page | Pass |
 |LIU can access profile page|Pass|
 |LIU can see their details on the accounts home page|Pass|
-|LIU can update their first name|Pass|
-|LIU can update their last name|Pass|
-|LIU can update their email|Pass|
 |LIU can update their phone number|Pass|
-|LIU can navigate to their shipping information|Pass|
 |LIU can update street address 1 and 2|Pass|
 |LIU can update town or city|Pass|
 |LIU can update county|Pass|
 |LIU can update postcode|Pass|
 |LIU can update country|Pass|
-|LIU can navigate to change profile image page|Pass|
-|LIU who does not have a personal image has the default image|Pass|
-|LIU can add an image to their profile|Pass|
-|LIU can change their profile image once they have one set |Pass|
-|LIU can remove a personal image entirely |Pass|
-|LIU can select delete account|Pass|
-| Pop-up modal prompts the user to confirm account deletion before closing account |Pass|
-|LIU can close account successfully |Pass|
-|When user closes their account they are redirected to the home page|Pass|
-|When user closes account they receive a pop up notification advising them the account is closed|Pass|
+|When user logout they are redirected to the home page|Pass|
 
 </details>
 
@@ -730,13 +639,13 @@ Please see a table of acronyms used throughout testing:
 
 | Test |Result  |
 |--|--|
-|SUP can access admin panel from the my account dropdown | Pass |
-|SUP can access add product page from my account dropdown|Pass|
+|SUP can access admin panel by manually updateing url field | Pass |
+|SUP can access add product page from Product management dropdown|Pass|
 |SUP can see the edit product option on the products page|Pass|
 |SUP can see the delete option on the products page|Pass|
-|SUP can write blogs from the admin panel and publish them|Pass|
+|SUP can add categories, subcategories, products, icons, orders and reviews from the admin panel|Pass|
 |SUP can edit products and update all fields successfully|Pass|
-|SUP can delete products from the products page|Pass|
+|SUP can delete products from the products page and it has a heads up modal|Pass|
 
 </details>
 
@@ -748,13 +657,10 @@ Please see a table of acronyms used throughout testing:
 
 | Test |Result  |
 |--|--|
-|NLI cannot access contact page| Pass |
-|LIU can submit contact form to business|Pass|
-|SUP can view submitted forms from the admin panel|Pass|
-|LIU receives notification the form has been submitted|Pass|
 |User can navigate to privacy policy|Pass|
-|User can navigate to shipping policy|Pass|
-|User can navigate to terms of use page|Pass|
+|User can navigate to email link|Pass|
+|User can navigate to Copyright repository|Pass|
+|User can sign up to newsletter from footer|Pass|
 |Social links open up to the correct pages|Pass|
 |Social links open up in a new tab|Pass|
 
@@ -771,7 +677,6 @@ Please see a table of acronyms used throughout testing:
 |NLI can successfully make a payment & order| Pass |
 |LIU can successfully make a payment & order| Pass|
 |All users receive an email confirmation of order on deployed site|Fail|
-|In development email confirmation is printed to terminal|Pass|
 |If payment is successful user will be redirected to order success page|Pass|
 |If order fails due to incorrect information being submitted order will not be submitted|Pass|
 |If there is an error when processing the order the site returns a 500 error without processing order|Pass|
@@ -781,17 +686,13 @@ Please see a table of acronyms used throughout testing:
 ---
 
 <details>
-<summary>Blog Tests</summary>
+<summary>Mobile view</summary>
 <br>
 
 | Test |Result  |
 |--|--|
-|NLI can access blog pages| Pass |
-|NLI cannot post a comment on blog posts|Pass|
-|LIU can comment on blog posts|Pass|
-|LIU can like blog posts|Pass|
-|LIU's information shows in the comment section after they post comment|Pass|
-|LIU's correct profile image shows on the comment they made|Pass|
+|User can access all pages of the site in mobile view| Pass |
+|Pages scale down to mobile view,centering content| Pass |
   
 </details>
 
@@ -829,7 +730,7 @@ Please see a table of acronyms used throughout testing:
   <summary>W3 HTML Validation Screenshot</summary>
     </br>
 
-![W3 HTML Validation](media/readme/)
+![W3 HTML Validation](media/readme/html-no-errors.PNG)
   
   </details>
   
@@ -841,7 +742,7 @@ Please see a table of acronyms used throughout testing:
   <summary>W3 CSS Jigsaw Screenshot</summary>
   </br>
   
-![w3 Jigsaw CSS checker](media/readme/)
+![w3 Jigsaw CSS checker](media/readme/css-no-errors.PNG)
 
 </details>
 
