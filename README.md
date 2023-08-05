@@ -983,4 +983,7 @@ The steps to fork this repository are:
 ### The CI tutor support team
 > The Tutor support team in the Code Institute were always on hand to answer my questions when bugs just doesnt make sense
 
+### The CI Walkthrough projects (Boutique Ado mainly)
+> The walkthroughs and the source code is a great help when starting and setting up a skeleton of my project.
+
 [Back to Top of page](#contents)
