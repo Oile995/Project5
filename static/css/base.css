@@ -293,10 +293,13 @@ input[name='q']::placeholder {
 }
 
 .description-container{
+    margin-top: 20%;
     margin-left: 10%;
     margin-right: 10%;
 }
-
+.specification-container{
+    margin-top: 20%;
+}
 .similar-products{
     margin-top: 10vw;
 }
@@ -325,9 +328,6 @@ input[name='q']::placeholder {
 .site-logo {
     height: 4vw;
 }
-
-
-
 
 /* ================= RATINGS ============== */
 /* Taken from https://github.com/dev-rathankumar/greatkart-pre-deploy/blob/main/templates/store/product_detail.html */
@@ -473,6 +473,7 @@ input[name='q']::placeholder {
     .header-container {
         padding-top: 116px;
     }
+
     body {
         height: calc(100vh - 116px);
     }
@@ -536,6 +537,13 @@ input[name='q']::placeholder {
     
     .carousel-control-prev {
         left: 5%;
+    }
+
+    .description-container{
+        margin-top: 5%;
+    }
+    .specification-container{
+        margin-top: 0;
     }
 
 }
