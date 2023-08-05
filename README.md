@@ -940,6 +940,16 @@ The steps to fork this repository are:
 ##### Alan Bushell
   - I used Alans Ecommerce Project Razor sharp repository, for inspiration from Userstories to models/base.html to Readme structure and generic content.
   - I credit the deployment section of this readme to Alan, as we followed the same type of deployment, I re-used his Deployment section of the Readme.
+
+##### Images 
+I take no credit for the media used on the site.
+  - Logo, icons, placeholder image and sale-deal in carousel created in Canva by my Wife
+  - Product images take from https://www.klimamarket.mk and the following:
+  * https://www.electroluxhome.se/hem-hushall/klimat-ac/luftrenare/pa91-604gy/
+  * https://mistore.se/products/xiaomi-smart-air-purifier-4
+  * https://www.maxgaming.se/sv/luftrenare/mi-air-purifier-4-compact-vit-luftrenare
+  * Shutterstock through credits.
+  * Youtube for the few embedded youtube videos.
   
 [Back to Top of page](#contents)
 
