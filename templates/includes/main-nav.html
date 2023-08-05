@@ -1,10 +1,10 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="Category1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Air Conditioners
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="Category1">
             <a class="dropdown-item" href="{% url 'products' %}?subcategory=Split-System">Split-AC</a>
             <a class="dropdown-item" href="{% url 'products' %}?subcategory=Multi-Split-System">Multi-Split-System</a>
             <a class="dropdown-item" href="{% url 'products' %}?subcategory=Portable-Air-Conditioners">Portable-Air-Conditioners
@@ -12,21 +12,21 @@
             </a>
         </div>
       </li>
-      <li class="nav-item">
+      <li>
         <a class="nav-link" href="{% url 'products' %}?subcategory=Air-Purifiers">Air-Purifiers</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="sorted" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sort Products
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="sorted">
           <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
           <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
           <a href="{% url 'products' %}?sort=subcategory&direction=asc" class="dropdown-item ">By Category</a>
           <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li>
         <a class="nav-link" href="{% url 'products' %}">All Products</a>
       </li>
       <li class="nav-item dropdown">
@@ -41,6 +41,7 @@
             <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
             <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
           {% endif %}
+        </div>
       </li>
       {% if request.user.is_superuser %}
       <li class="nav-item dropdown">
@@ -51,6 +52,7 @@
           <a href="{% url 'add_category' %}" class="dropdown-item">Add Category</a>
           <a href="{% url 'add_subcategory' %}" class="dropdown-item">Add Subcategory</a>
           <a href="{% url 'add_product' %}" class="dropdown-item">Add Product</a>
+        </div>
       </li>
       {% endif %}
     </ul>

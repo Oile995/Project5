@@ -5,7 +5,7 @@ html {
 body {
     background-size: cover;
     height: calc(100vh - 164px);
-    color:rgb(rgb(41, 40, 40), rgb(27, 27, 27), rgb(160, 160, 167));
+    color:rgb(39, 38, 38);
     font-family: 'Lato';
 }
 
