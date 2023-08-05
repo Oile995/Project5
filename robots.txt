@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /cart/
+Sitemap: https://glacial-ac-d07dd9f0063c.herokuapp.com/sitemap.xml
