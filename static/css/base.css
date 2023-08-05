@@ -435,13 +435,6 @@ input[name='q']::placeholder {
   
   /* fixed top navbar only on medium and up */
   @media (min-width: 992px) {
-      .fixed-top-desktop-only {
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          z-index: 1030;
-      }
       .header-container {
           padding-top: 220px;
       }
